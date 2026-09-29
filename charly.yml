@@ -1,7 +1,5 @@
-version: 2026.232.0520
 kde-shell:
     candy:
-        version: 2026.155.2119
         description: |
             Installs the shared SDDM-free KDE Plasma Wayland session package set — plasma-desktop, the core session components, a curated app set, and the kdotool KWin automation tool — used by both the bare-metal seat and the headless streamed pod.
             The SDDM-free KDE Plasma Wayland SESSION package set — the shared subset
