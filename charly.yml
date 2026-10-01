@@ -16,7 +16,7 @@ kde-shell:
             package list (R3). require: dbus (the Plasma session bus). Every package
             lands a binary at a fixed /usr/bin path, so presence is directly verifiable.
         require:
-            - '@github.com/opencharly/pod-dbus:v2026.272.0105'
+            - '@github.com/opencharly/pod-dbus:v2026.274.0648'
         distro:
             arch:
                 package:
