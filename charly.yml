@@ -41,17 +41,26 @@ kde-shell:
                     - kcalc
                     - gwenview
                     - spectacle
-                aur:
-                    # kdotool — the KWin window-management automation tool driving
-                    # the `wl` check verb on KWin (the KWin analogue of wlroots' wlrctl). It
-                    # talks to KWin via the scripting D-Bus API: search /
-                    # windowactivate / windowminimize / windowclose / windowstate
-                    # (fullscreen) / getwindowgeometry. Pointer + keyboard injection
-                    # are NOT provided by kdotool (KWin scripting cannot synthesize
-                    # input) — keyboard uses wtype, pointer is a separate cutover.
-                    package:
-                        - kdotool
         plan:
+            - run: kdotool is fetched from its OWN pinned release, not an AUR builder
+              id: kde-shell-kdotool-download
+              # WHY NOT `aur: package: [kdotool]`: AUR packages are installed by an
+              # EXTERNALIZED detection builder (sdk render_prep: "for each matching candy an
+              # EXTERNALIZED detection builder (pixi/npm/aur) ... the COPY lines come from
+              # the plugin"). When that builder does not run, the package is SILENTLY
+              # skipped and the build still exits 0 — measured on arch AND cachyos bases
+              # (opencharly/layer-kde-shell#7). A pinned release tarball needs no helper, no
+              # cargo, and cannot be dropped silently.
+              download: https://github.com/jinliu/kdotool/releases/download/v0.3.0/kdotool-0.3.0-x86_64-unknown-linux-gnu.tar.gz
+              to: /tmp/kdotool
+              extract: tar.gz
+            - run: install the kdotool binary where the wl verb expects it
+              id: kde-shell-kdotool-install
+              command: |
+                set -eu
+                install -Dm755 /tmp/kdotool/kdotool /usr/bin/kdotool
+                test -x /usr/bin/kdotool
+              run_as: root
             - check: plasmashell, the Plasma shell, is installed at /usr/bin/plasmashell
               file:
                 file: /usr/bin/plasmashell
