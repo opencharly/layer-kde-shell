@@ -52,7 +52,6 @@ bare-metal consumer adds `sddm` and `systemctl set-default graphical.target`.
 
 - Owning skill: `/charly-selkies:kde-shell` — the SDDM-free Plasma session leaf
 - Bare-metal consumer: `opencharly/pod-kde-desktop` (the `kde-desktop` candy)
-- Headless streamed consumer: `/charly-selkies:kde-selkies`
 - KWin automation verb: `/charly-check:wl`
 - Base: `/charly-distros:cachyos`
 - [`opencharly/charly`](https://github.com/opencharly/charly) — the charly CLI and image builder
